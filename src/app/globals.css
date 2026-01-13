@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* ====== TOKENS ====== */
+:root{
+  --wild-bg:#000000;        /* глубокий синий фон */
+  --wild-panel:#000000;     /* карточки/панели */ 
+  --wild-stroke:#1f2a44;    /* бордеры */
+  --wild-accent:#3b82f6;    /* голубой */
+  --wild-accent-2:#06b6d4;  /* бирюза */
+}
+
+html, body, :root { height: 100%; }
+html { scroll-behavior: smooth; }               /* плавный скролл */
+body {
+  background: radial-gradient(1200px 700px at 50% -220px,#0e1a36,transparent), var(--wild-bg);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* full-bleed секции — только горизонтальные отступы, без max-width */
+.section {
+  padding-left: clamp(16px, 3vw, 40px);
+  padding-right: clamp(16px, 3vw, 40px);
+}
+
+/* текстовые блоки можно слегка ограничивать */
+.section-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ====== НЕОНОВЫЙ БОРДЕР (в духе codepen) ======
+   Использование: class="wild-border" на карточке/кнопке
+   Можно усилить сияние: wild-glow
+*/
+.wild-border {
+  position: relative;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--wild-panel), var(--wild-panel)) padding-box,
+    conic-gradient(from 140deg, var(--wild-accent), var(--wild-accent-2), var(--wild-accent)) border-box;
+  border-radius: 14px;
+}
+.wild-glow { box-shadow: 0 0 24px rgba(59,130,246,.25), inset 0 0 0 1px rgba(255,255,255,.03); }
+
+/* убрать родной скроллбар по желанию */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* навигационная линия как в CodePen (градиент + свечение) */
+/* стиль «magic line» как в кодпене */
+.nav-magic-line{
+  background: linear-gradient(90deg, var(--wild-accent), var(--wild-accent-2));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--wild-accent) 60%, transparent),
+              0 0 28px color-mix(in srgb, var(--wild-accent-2) 45%, transparent);
+  transition: transform .35s cubic-bezier(.25,.8,.25,1), width .35s cubic-bezier(.25,.8,.25,1), opacity .2s ease;
+}
+
+/* кнопки в стиле исходника (если захочешь использовать className напрямую) */
+.auth-btn{ transition: all .3s ease }
+.login-btn{ color:#e0e0e0; border:1px solid var(--wild-stroke); border-radius:25px; padding:8px 20px }
+.login-btn:hover{ color:#fff; border-color:#555 }
+.signup-btn{ border-radius:25px; padding:8px 20px }
