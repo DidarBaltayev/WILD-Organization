@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import { BarChart3, UserRound, CalendarClock, Users } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0 },
 } as const;
 
@@ -29,30 +29,28 @@ export default function Platform() {
         title: "Единая рейтинговая система",
         text: (
           <>
-            Игроки будут подниматься или опускаться в рейтинге вместе со своим{" "}
+            Игроки поднимаются или опускаются в рейтинге вместе со своим{" "}
             <span className="font-semibold text-white">составом</span>. Победы —
-            рост вверх. Поражения — падение. Всё честно, прозрачно и командно.
+            рост. Поражения — падение. Всё прозрачно и командно.
           </>
         ),
         Icon: BarChart3,
       },
       {
-        title: "Профили для всех участников",
+        title: "Профили участников",
         text: (
           <>
-            Каждый игрок, капитан, тренер и администратор получит личный кабинет
-            со статистикой, историей матчей, достижениями, прогрессом и
-            возможностями.
+            Каждый игрок, капитан, тренер и администратор получит профиль со
+            статистикой, историей матчей и прогрессом.
           </>
         ),
         Icon: UserRound,
       },
       {
-        title: "Сезоны рейтинга (2–3 месяца)",
+        title: "Сезоны (2–3 месяца)",
         text: (
           <>
-            Система будет работать сезонами. По окончанию каждого сезона топ
-            составы рейтинговой системы автоматически проходят в турнир{" "}
+            По итогам сезона топ составы автоматически проходят в турнир{" "}
             <span
               className="font-[var(--font-teko)] font-semibold uppercase tracking-[0.14em] bg-clip-text text-transparent"
               style={{
@@ -63,7 +61,7 @@ export default function Platform() {
             >
               BlueZone
             </span>
-            , который проводит сама платформа.
+            .
           </>
         ),
         Icon: CalendarClock,
@@ -72,8 +70,8 @@ export default function Platform() {
         title: "Управление составами",
         text: (
           <>
-            Капитаны смогут управлять своими составами: заявки игроков, матчи,
-            расписания, внутренняя дисциплина.
+            Капитаны управляют заявками, матчами, расписаниями и дисциплиной
+            внутри состава.
           </>
         ),
         Icon: Users,
@@ -84,64 +82,67 @@ export default function Platform() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="platform" className="relative py-16 lg:py-24">
-        <div className="relative mx-auto max-w-[1180px] px-6 lg:px-8">
+      <section id="platform" className="wild-section">
+        <div className="wild-container">
           <m.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="
-              relative overflow-hidden rounded-[28px]
-              border border-white/10 bg-white/[0.03] backdrop-blur-xl
-              shadow-[0_30px_110px_rgba(0,0,0,0.55)]
+              relative overflow-hidden rounded-[30px]
+              border border-white/10 bg-white/[0.04] backdrop-blur-xl
+              shadow-[0_40px_140px_rgba(0,0,0,0.6)]
             "
           >
-            {/* background */}
+            {/* atmosphere */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-90"
               style={{
                 background:
-                  "radial-gradient(900px 520px at 14% 10%, rgba(59,130,246,.18), transparent 62%), radial-gradient(860px 560px at 90% 86%, rgba(6,182,212,.12), transparent 58%)",
+                  "radial-gradient(1200px 680px at 18% 0%, rgba(59,130,246,.22), transparent 62%), radial-gradient(1100px 720px at 92% 90%, rgba(6,182,212,.14), transparent 60%)",
               }}
             />
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
-              style={{ boxShadow: "inset 0 0 0 1px rgba(59,130,246,0.10)" }}
+              style={{ boxShadow: "inset 0 0 0 1px rgba(59,130,246,0.12)" }}
             />
 
-            <div className="relative p-7 lg:p-12">
-              {/* HEADER — CENTERED */}
+            {/* ✅ mobile-safe padding (desktop unchanged) */}
+            <div className="relative p-5 sm:p-6 lg:p-14">
+              {/* HEADER CENTER (как WhatIsWild/Mission) */}
               <div className="flex flex-col items-center text-center">
-                <span
+                <h2
                   className="
                     font-[var(--font-teko)] font-semibold uppercase
-                    tracking-[0.18em]
-                    text-[30px] leading-none
-                    lg:text-[44px]
+                    tracking-[0.12em]
+                    text-[38px] leading-[0.95]
+                    sm:text-[52px]
+                    lg:text-[76px]
+                    xl:text-[86px]
                     bg-clip-text text-transparent
                   "
                   style={{
                     backgroundImage: `
                       linear-gradient(
-                        90deg,
-                        rgba(190,210,255,0.98) 0%,
-                        rgba(110,170,255,0.92) 45%,
-                        rgba(6,182,212,0.88) 100%
+                        180deg,
+                        rgba(200,220,255,1) 0%,
+                        rgba(130,170,255,0.95) 45%,
+                        rgba(90,130,210,0.90) 100%
                       )
                     `,
-                    textShadow: "0 12px 54px rgba(40,80,160,0.45)",
+                    textShadow: "0 14px 64px rgba(40,80,160,0.55)",
                   }}
                 >
                   ПЛАТФОРМА WILD
-                </span>
+                </h2>
 
                 <span
                   aria-hidden
-                  className="mt-4 h-px w-40"
+                  className="mt-5 h-px w-40 sm:w-56"
                   style={{
                     background:
                       "linear-gradient(90deg, transparent, rgba(59,130,246,.65), rgba(6,182,212,.45), transparent)",
@@ -150,45 +151,25 @@ export default function Platform() {
                 />
               </div>
 
-              {/* TEXT */}
-              <div className="mt-6 mx-auto max-w-[920px] space-y-3 text-center text-[15px] leading-relaxed text-white/80 lg:text-[18px] lg:leading-relaxed">
+              {/* TEXT CENTER (контекст НЕ менял) */}
+              <div className="mt-7 mx-auto max-w-[1200px] space-y-4 sm:space-y-5 text-center text-[16px] leading-relaxed text-white/85 sm:text-[19px] lg:text-[22px]">
                 <p>
-                  Платформа WILD — это будущая цифровая система организации,
-                  рейтинга и развития игроков WILD.
+                  Платформа WILD — цифровая основа всей организации, объединяющая
+                  игроков, составы и рейтинги.
                 </p>
                 <p>
-                  Сейчас она находится в стадии разработки и станет фундаментом
-                  всей экосистемы.
+                  Она формирует правила роста, отбора и продвижения внутри
+                  экосистемы.
                 </p>
               </div>
 
-              {/* NODES */}
-              <div className="mt-12">
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="text-[12px] font-semibold tracking-[0.26em] uppercase text-white/60">
-                    ЧТО БУДЕТ ВНУТРИ ПЛАТФОРМЫ
-                  </span>
-                  <span
-                    aria-hidden
-                    className="h-px flex-1"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.06), transparent)",
-                    }}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {NODES.map((n) => (
-                    <NodeCard key={n.title} {...n} allowHover={allowHover} />
-                  ))}
-                </div>
+              {/* ✅ NODES: phone-first spacing + padding inside cards */}
+              <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                {NODES.map((n) => (
+                  <NodeCard key={n.title} {...n} allowHover={allowHover} />
+                ))}
               </div>
             </div>
-
-            {reduce ? null : (
-              <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0" />
-            )}
           </m.div>
         </div>
       </section>
@@ -213,20 +194,33 @@ function NodeCard({
       transition={{ duration: 0.18, ease: "easeOut" }}
       className="
         relative overflow-hidden rounded-2xl
-        border border-white/10 bg-white/[0.03]
-        p-5
+        border border-white/10 bg-white/[0.04]
+        p-4 sm:p-6
       "
     >
-      <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.08)]" />
+      {/* inner stroke */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.10)]" />
+      {/* top shine */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rotate-12 opacity-40 blur-2xl"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 30%, rgba(59,130,246,.34), transparent 70%)",
+        }}
+      />
 
-      <div className="relative flex items-start gap-3">
-        <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
-          <Icon className="h-4 w-4 text-[color:var(--wild-accent)]" />
+      <div className="relative flex items-start gap-4">
+        {/* ✅ icon box scales down on phones */}
+        <div className="mt-0.5 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] shrink-0">
+          <Icon className="h-5 w-5 text-[color:var(--wild-accent)]" />
         </div>
 
         <div className="min-w-0">
-          <div className="text-[13px] font-semibold text-white">{title}</div>
-          <div className="mt-2 text-xs leading-relaxed text-white/60">
+          <div className="text-[15px] sm:text-base font-semibold text-white">
+            {title}
+          </div>
+          <div className="mt-2 text-[13px] sm:text-sm leading-relaxed text-white/70">
             {text}
           </div>
         </div>

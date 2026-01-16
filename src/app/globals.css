@@ -40,3 +40,73 @@ h1,h2,h3{
   color: transparent;
   text-shadow: 0 0 28px rgba(59,130,246,0.22);
 }
+
+/* ====================================================================== */
+/* ✅ WILD LAYOUT SYSTEM (ONE STANDARD FOR ALL SECTIONS, MOBILE-FIRST)     */
+/* ====================================================================== */
+
+/* Секция: одинаковые вертикальные отступы везде */
+.wild-section{
+  position: relative;
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+@media (min-width: 1024px){
+  .wild-section{
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+/* Контейнер: на мобиле не узкий, на десктопе широкий как ты хочешь */
+.wild-container{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* mobile padding */
+  padding-left: 14px;
+  padding-right: 14px;
+
+  /* base max width (phone/tablet) */
+  max-width: 720px;
+}
+
+@media (min-width: 640px){
+  .wild-container{
+    padding-left: 18px;
+    padding-right: 18px;
+    max-width: 980px;
+  }
+}
+
+@media (min-width: 1024px){
+  .wild-container{
+    padding-left: 40px;
+    padding-right: 40px;
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 1536px){
+  .wild-container{
+    max-width: 2200px;
+  }
+}
+
+/* Чтобы “табличные” блоки не ломали мобилу: просто комфортный горизонтальный скролл */
+.wild-xscroll{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Чтобы на мобиле якоря не прятались под fixed header (если он есть) */
+.wild-anchor{
+  scroll-margin-top: 84px;
+}
+@media (min-width: 1024px){
+  .wild-anchor{
+    scroll-margin-top: 96px;
+  }
+}

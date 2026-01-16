@@ -31,13 +31,16 @@ function clamp(n: number, a: number, b: number) {
   return Math.max(a, Math.min(b, n));
 }
 
-const GRID =
-  "grid-cols-[92px_280px_84px_96px_84px_176px_110px_160px]"; // rank / roster / M / W-L / WR / Last5 / AvgELO / Points
+/**
+ * ✅ Desktop/tablet grid
+ * FIX: чтобы не было “пустоты” справа — вторая колонка = 1fr и Points вправо
+ */
+const GRID = "grid-cols-[108px_1fr_96px_120px_96px_200px_132px_176px]";
 
 function WildLogo({
   variant,
-  size = 42,
-  icon = 30,
+  size = 46,
+  icon = 32,
 }: {
   variant: "blue" | "red";
   size?: number;
@@ -50,7 +53,7 @@ function WildLogo({
       className={cn(
         "relative inline-flex items-center justify-center shrink-0",
         "rounded-xl border border-white/10",
-        "bg-white/[0.03] overflow-hidden"
+        "bg-white/[0.035] overflow-hidden"
       )}
       style={{ width: size, height: size }}
     >
@@ -88,8 +91,8 @@ const PointsChip = memo(function PointsChip({
     <div
       className={cn(
         "inline-flex items-center justify-center",
-        "rounded-2xl border px-3 py-2",
-        "w-[132px] select-none",
+        "rounded-2xl border px-3.5 py-2.5",
+        "w-[150px] select-none",
         hot
           ? "border-[rgba(255,70,70,0.35)] bg-[rgba(255,70,70,0.14)]"
           : "border-[rgba(59,130,246,0.22)] bg-[rgba(59,130,246,0.10)]"
@@ -98,7 +101,7 @@ const PointsChip = memo(function PointsChip({
       <div className="text-center">
         <div
           className={cn(
-            "text-lg font-extrabold leading-none tabular-nums",
+            "text-[20px] font-extrabold leading-none tabular-nums",
             hot
               ? "text-[rgba(255,190,190,0.95)]"
               : "text-[rgba(190,220,255,0.95)]"
@@ -106,7 +109,7 @@ const PointsChip = memo(function PointsChip({
         >
           {points}
         </div>
-        <div className="mt-1 text-[10px] font-semibold tracking-[0.18em] text-white/45">
+        <div className="mt-1 text-[11px] font-semibold tracking-[0.18em] text-white/45">
           POINTS
         </div>
       </div>
@@ -116,16 +119,16 @@ const PointsChip = memo(function PointsChip({
 
 const Last5 = memo(function Last5({ arr }: { arr: Array<"W" | "L"> }) {
   return (
-    <div className="flex items-center justify-center gap-1 w-full">
+    <div className="flex items-center justify-center gap-1.5 w-full">
       {arr.slice(0, 5).map((v, i) => {
         const win = v === "W";
         return (
           <span
             key={`${v}-${i}`}
             className={cn(
-              "inline-flex h-5 w-5 items-center justify-center",
+              "inline-flex h-6 w-6 items-center justify-center",
               "rounded-md border",
-              "text-[11px] font-extrabold leading-none tabular-nums",
+              "text-[12px] font-extrabold leading-none tabular-nums",
               win
                 ? "border-[rgba(34,197,94,0.35)] bg-[rgba(34,197,94,0.16)] text-[rgba(220,255,235,0.98)]"
                 : "border-[rgba(239,68,68,0.40)] bg-[rgba(239,68,68,0.18)] text-[rgba(255,225,225,0.98)]"
@@ -140,7 +143,6 @@ const Last5 = memo(function Last5({ arr }: { arr: Array<"W" | "L"> }) {
 });
 
 function getRankBadgeStyle(rank: number) {
-  // 1..10
   if (rank === 1) {
     return {
       bg: "linear-gradient(180deg, rgba(255,215,128,0.38), rgba(255,215,128,0.10))",
@@ -184,7 +186,7 @@ const RankBadge = memo(function RankBadge({ rank }: { rank: number }) {
   return (
     <div className="flex items-center justify-center">
       <div
-        className="relative inline-flex items-center justify-center h-10 w-[68px] rounded-2xl border font-extrabold tabular-nums"
+        className="relative inline-flex items-center justify-center h-12 w-[78px] rounded-2xl border font-extrabold tabular-nums text-[16px]"
         style={{
           background: s.bg,
           borderColor: s.border,
@@ -192,7 +194,6 @@ const RankBadge = memo(function RankBadge({ rank }: { rank: number }) {
           color: s.text,
         }}
       >
-        {/* small top shine */}
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-2xl opacity-70"
@@ -223,7 +224,7 @@ const PlayersPanel = memo(function PlayersPanel({
       initial={reduce ? false : { opacity: 0, y: -6 }}
       animate={reduce ? undefined : { opacity: 1, y: 0 }}
       transition={reduce ? { duration: 0 } : { duration: 0.16, ease: "easeOut" }}
-      className="px-5 pb-5"
+      className="px-4 sm:px-6 pb-5"
     >
       <div
         className={cn(
@@ -232,7 +233,7 @@ const PlayersPanel = memo(function PlayersPanel({
         )}
       >
         <div
-          className="px-4 py-3 border-b border-white/10"
+          className="px-5 py-4 border-b border-white/10"
           style={{
             background:
               accent === "red"
@@ -241,32 +242,32 @@ const PlayersPanel = memo(function PlayersPanel({
           }}
         >
           <div className="flex items-center justify-between gap-3">
-            <div className="text-sm font-extrabold text-white">
+            <div className="text-[15px] font-extrabold text-white">
               {roster} · Игроки
             </div>
-            <div className="text-[11px] text-white/55">5–7</div>
+            <div className="text-[12px] text-white/55">5–7</div>
           </div>
         </div>
 
-        <div className="px-4 py-3">
-          <div className="grid gap-2 sm:grid-cols-2">
+        <div className="px-5 py-4">
+          <div className="grid gap-3 sm:grid-cols-2">
             {players.slice(0, 7).map((p, i) => (
               <div
                 key={`${p.name}-${i}`}
-                className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2"
+                className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3"
               >
                 <div className="min-w-0">
-                  <div className="text-sm font-bold text-white truncate">
+                  <div className="text-[15px] font-bold text-white truncate">
                     {p.flag ? <span className="mr-2">{p.flag}</span> : null}
                     {p.name}
                   </div>
                   {p.role ? (
-                    <div className="text-[11px] text-white/55">{p.role}</div>
+                    <div className="text-[12px] text-white/55">{p.role}</div>
                   ) : null}
                 </div>
 
                 <div className="text-right pl-3 shrink-0">
-                  <div className="text-sm font-extrabold text-white tabular-nums">
+                  <div className="text-[15px] font-extrabold text-white tabular-nums">
                     {typeof p.elo === "number" ? p.elo : "—"}
                   </div>
                   <div className="text-[11px] text-white/45">ELO</div>
@@ -289,7 +290,7 @@ const Row = memo(function Row({
   players,
 }: {
   r: RosterStats;
-  idx: number; // 0..9
+  idx: number;
   isOpen: boolean;
   reduce: boolean;
   onToggle: (roster: string) => void;
@@ -311,26 +312,30 @@ const Row = memo(function Row({
         title="Открыть игроков"
         aria-label={`Open roster ${r.roster}`}
         className={cn(
-          "px-5 py-4 transition",
-          "grid items-center gap-3",
+          "px-6 py-5 transition",
+          "grid items-center gap-4 w-full",
           GRID,
           isTop3 ? "bg-white/[0.06]" : "",
-          allowHover ? (isTop3 ? "hover:bg-white/[0.08]" : "hover:bg-white/[0.04]") : "",
+          allowHover
+            ? isTop3
+              ? "hover:bg-white/[0.08]"
+              : "hover:bg-white/[0.045]"
+            : "",
           "cursor-pointer select-none"
         )}
       >
-        {/* rank medal */}
         <RankBadge rank={rank} />
 
-        {/* roster + MVP + show players */}
-        <div className="flex items-start gap-3 min-w-0">
+        <div className="flex items-start gap-4 min-w-0">
           <WildLogo variant={isTop3 ? "red" : "blue"} />
           <div className="min-w-0">
-            <div className="flex items-center gap-3">
-              <div className="text-sm font-extrabold text-white">{r.roster}</div>
-              <div className="text-[11px] text-white/45">
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="text-[16px] font-extrabold text-white">
+                {r.roster}
+              </div>
+              <div className="text-[12px] text-white/45">
                 MVP:{" "}
-                <span className="text-white/70 font-semibold">{r.mvp}</span>
+                <span className="text-white/75 font-semibold">{r.mvp}</span>
               </div>
             </div>
 
@@ -338,8 +343,8 @@ const Row = memo(function Row({
               <span
                 className={cn(
                   "inline-flex items-center justify-center",
-                  "rounded-lg border px-2.5 py-1",
-                  "text-[11px] font-extrabold tracking-[0.16em] uppercase",
+                  "rounded-lg border px-3 py-1.5",
+                  "text-[12px] font-extrabold tracking-[0.14em] uppercase",
                   isTop3
                     ? "border-[rgba(255,70,70,0.25)] bg-[rgba(255,70,70,0.10)] text-[rgba(255,190,190,0.92)]"
                     : "border-[rgba(59,130,246,0.20)] bg-[rgba(59,130,246,0.10)] text-[rgba(190,220,255,0.92)]"
@@ -351,15 +356,15 @@ const Row = memo(function Row({
           </div>
         </div>
 
-        <div className="text-center text-[13px] font-semibold text-white/80 tabular-nums">
+        <div className="text-center text-[15px] font-semibold text-white/85 tabular-nums">
           {r.matches}
         </div>
 
-        <div className="text-center text-[13px] font-semibold text-white/80 tabular-nums">
+        <div className="text-center text-[15px] font-semibold text-white/85 tabular-nums">
           {r.wins}-{r.losses}
         </div>
 
-        <div className="text-center text-[13px] font-semibold text-white/80 tabular-nums">
+        <div className="text-center text-[15px] font-semibold text-white/85 tabular-nums">
           {r.winrate}%
         </div>
 
@@ -367,17 +372,18 @@ const Row = memo(function Row({
           <Last5 arr={r.last5} />
         </div>
 
-        <div className="text-center text-[13px] font-semibold text-white/80 tabular-nums">
+        <div className="text-center text-[15px] font-semibold text-white/85 tabular-nums">
           {r.avgElo}
         </div>
 
-        <div className="flex items-center justify-center">
+        {/* ✅ Points вправо — фикс “пустого” справа */}
+        <div className="flex items-center justify-end">
           <PointsChip points={r.points} hot={isTop3} />
         </div>
       </motion.div>
 
       {isOpen ? (
-        <div className="pb-4">
+        <div className="pb-3">
           <PlayersPanel
             roster={r.roster}
             players={players}
@@ -389,6 +395,151 @@ const Row = memo(function Row({
     </div>
   );
 });
+
+/* =========================
+   ✅ MOBILE CARD VIEW
+========================= */
+
+const MobileCard = memo(function MobileCard({
+  r,
+  idx,
+  isOpen,
+  reduce,
+  onToggle,
+  players,
+}: {
+  r: RosterStats;
+  idx: number;
+  isOpen: boolean;
+  reduce: boolean;
+  onToggle: (roster: string) => void;
+  players: Player[];
+}) {
+  const isTop3 = idx < 3;
+  const rank = idx + 1;
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.045] backdrop-blur-xl overflow-hidden">
+      <motion.button
+        type="button"
+        onClick={() => onToggle(r.roster)}
+        className={cn(
+          "w-full text-left p-4",
+          "active:scale-[0.995]",
+          isTop3 ? "bg-white/[0.04]" : ""
+        )}
+        style={{ WebkitTapHighlightColor: "transparent" }}
+      >
+        <div className="flex items-start gap-3">
+          <div className="shrink-0">
+            <RankBadge rank={rank} />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start gap-3">
+              <WildLogo variant={isTop3 ? "red" : "blue"} size={44} icon={30} />
+
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-[16px] font-extrabold text-white truncate">
+                    {r.roster}
+                  </div>
+                  <div className="shrink-0">
+                    <div
+                      className={cn(
+                        "rounded-xl border px-3 py-2",
+                        isTop3
+                          ? "border-[rgba(255,70,70,0.28)] bg-[rgba(255,70,70,0.10)]"
+                          : "border-[rgba(59,130,246,0.22)] bg-[rgba(59,130,246,0.10)]"
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          "text-[16px] font-extrabold leading-none tabular-nums",
+                          isTop3
+                            ? "text-[rgba(255,190,190,0.95)]"
+                            : "text-[rgba(190,220,255,0.95)]"
+                        )}
+                      >
+                        {r.points}
+                      </div>
+                      <div className="mt-1 text-[10px] font-semibold tracking-[0.18em] text-white/45">
+                        POINTS
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-1 text-[12px] text-white/45">
+                  MVP: <span className="text-white/75 font-semibold">{r.mvp}</span>
+                </div>
+
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  <MiniStat label="M" value={r.matches} />
+                  <MiniStat label="W-L" value={`${r.wins}-${r.losses}`} />
+                  <MiniStat label="WR" value={`${r.winrate}%`} />
+                </div>
+
+                <div className="mt-3 flex items-center justify-between gap-3">
+                  <div className="flex-1">
+                    <div className="text-[11px] text-white/45 mb-1">Last 5</div>
+                    <Last5 arr={r.last5} />
+                  </div>
+
+                  <div className="shrink-0 text-right">
+                    <div className="text-[11px] text-white/45">Avg ELO</div>
+                    <div className="text-[14px] font-extrabold text-white tabular-nums">
+                      {r.avgElo}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <span
+                    className={cn(
+                      "inline-flex items-center justify-center",
+                      "rounded-lg border px-3 py-1.5",
+                      "text-[11px] font-extrabold tracking-[0.14em] uppercase",
+                      isTop3
+                        ? "border-[rgba(255,70,70,0.25)] bg-[rgba(255,70,70,0.10)] text-[rgba(255,190,190,0.92)]"
+                        : "border-[rgba(59,130,246,0.20)] bg-[rgba(59,130,246,0.10)] text-[rgba(190,220,255,0.92)]"
+                    )}
+                  >
+                    {isOpen ? "СКРЫТЬ ИГРОКОВ" : "ПОКАЗАТЬ ИГРОКОВ"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.button>
+
+      {isOpen ? (
+        <div className="pb-2">
+          <PlayersPanel
+            roster={r.roster}
+            players={players}
+            reduce={reduce}
+            accent={isTop3 ? "red" : "blue"}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
+});
+
+function MiniStat({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2">
+      <div className="text-[10px] font-semibold tracking-[0.18em] text-white/45 uppercase">
+        {label}
+      </div>
+      <div className="mt-0.5 text-[13px] font-extrabold text-white tabular-nums">
+        {value}
+      </div>
+    </div>
+  );
+}
 
 export default function RankShowcase() {
   const reduce = useReducedMotion() ?? false;
@@ -535,13 +686,21 @@ export default function RankShowcase() {
   }, [playersByRoster]);
 
   return (
-    <section className="relative py-14 lg:py-20">
-      <div className="relative mx-auto max-w-[1180px] px-6 lg:px-8">
+    <section className="relative py-20 lg:py-32">
+      <div
+        className="
+          relative mx-auto w-full
+          max-w-[1800px]
+          px-4 sm:px-6
+          lg:px-10
+          2xl:max-w-[2200px]
+        "
+      >
         {/* title */}
         <div className="relative">
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-10 left-0 h-[140px] w-[560px] blur-3xl opacity-70"
+            className="pointer-events-none absolute -top-14 left-0 h-[180px] w-[720px] blur-3xl opacity-70"
             style={{
               background:
                 "radial-gradient(65% 65% at 30% 50%, rgba(59,130,246,.62), transparent 70%)",
@@ -550,53 +709,72 @@ export default function RankShowcase() {
 
           <h3
             className={cn(
-              "relative font-extrabold tracking-tight",
-              "text-4xl lg:text-5xl",
+              "relative font-[var(--font-teko)] font-semibold uppercase",
+              "tracking-[0.12em]",
+              "text-[48px] leading-[0.95] sm:text-[60px] lg:text-[78px] xl:text-[88px]",
               "bg-clip-text text-transparent"
             )}
             style={{
               backgroundImage:
-                "linear-gradient(90deg, rgba(190,210,255,0.98) 0%, rgba(110,170,255,0.92) 45%, rgba(6,182,212,0.88) 100%)",
+                "linear-gradient(180deg, rgba(200,220,255,1) 0%, rgba(130,170,255,0.95) 45%, rgba(90,130,210,0.9) 100%)",
+              textShadow: "0 18px 80px rgba(40,80,160,0.6)",
             }}
           >
             ТОП-10 СОСТАВОВ WILD
           </h3>
 
-          <div className="mt-2 h-px w-full bg-gradient-to-r from-white/15 via-white/10 to-transparent" />
+          <div className="mt-4 h-px w-full bg-gradient-to-r from-white/15 via-white/10 to-transparent" />
         </div>
 
-        {/* table */}
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl relative">
-          <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.12)]" />
+        {/* ✅ MOBILE (cards) */}
+        <div className="mt-8 grid gap-4 md:hidden">
+          {rows.map((r, idx) => (
+            <MobileCard
+              key={r.roster}
+              r={r}
+              idx={idx}
+              isOpen={activeRoster === r.roster}
+              reduce={reduce}
+              onToggle={onToggle}
+              players={playersByRoster[r.roster] ?? []}
+            />
+          ))}
+        </div>
+
+        {/* ✅ DESKTOP/TABLET (table) */}
+        <div className="mt-10 hidden md:block overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.045] backdrop-blur-xl relative">
+          <div className="pointer-events-none absolute inset-0 rounded-[28px] shadow-[inset_0_0_0_1px_rgba(59,130,246,0.12)]" />
 
           {/* HEAD */}
           <div
             className={cn(
-              "px-5 py-4 border-b border-white/10",
-              "grid items-center gap-3",
+              "px-6 py-5 border-b border-white/10",
+              "grid items-center gap-4 w-full",
               GRID
             )}
           >
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               #
             </div>
-            <div className="text-[12px] font-semibold text-white/60">Состав</div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60">
+              Состав
+            </div>
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               M
             </div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               W-L
             </div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               WR
             </div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               Last 5
             </div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-center">
               Avg ELO
             </div>
-            <div className="text-[12px] font-semibold text-white/60 text-center">
+            <div className="text-[14px] font-semibold tracking-[0.14em] uppercase text-white/60 text-right pr-1">
               Points
             </div>
           </div>

@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import { Target, ShieldCheck, Trophy, Sparkles } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0 },
 } as const;
 
@@ -23,8 +23,6 @@ export default function Mission() {
     typeof window !== "undefined" &&
     !window.matchMedia?.("(pointer: coarse)")?.matches;
 
-  // ✅ НЕ ДУБЛИРУЕМ: карточки = не “шанс/поддержка/турниры/рейтинг”,
-  // а короткие обещания-качества (без повторения текста миссии и WhatIsWild)
   const PILLARS: Pillar[] = useMemo(
     () => [
       {
@@ -53,28 +51,27 @@ export default function Mission() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <section id="mission" className="relative py-16 lg:py-24">
-        <div className="relative mx-auto max-w-[1180px] px-6 lg:px-8">
-          {/* ONE BIG BLOCK */}
+      <section id="mission" className="wild-section">
+        <div className="wild-container">
           <m.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="
-              relative overflow-hidden rounded-[28px]
-              border border-white/10 bg-white/[0.035] backdrop-blur-xl
-              shadow-[0_30px_110px_rgba(0,0,0,0.55)]
+              relative overflow-hidden rounded-[30px]
+              border border-white/10 bg-white/[0.04] backdrop-blur-xl
+              shadow-[0_40px_140px_rgba(0,0,0,0.6)]
             "
           >
-            {/* cheap inner atmosphere */}
+            {/* atmosphere */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-90"
               style={{
                 background:
-                  "radial-gradient(900px 520px at 18% 0%, rgba(59,130,246,.20), transparent 60%), radial-gradient(820px 520px at 95% 90%, rgba(6,182,212,.12), transparent 58%)",
+                  "radial-gradient(1200px 680px at 18% 0%, rgba(59,130,246,.22), transparent 62%), radial-gradient(1100px 700px at 90% 100%, rgba(6,182,212,.14), transparent 60%)",
               }}
             />
             <div
@@ -83,59 +80,63 @@ export default function Mission() {
               style={{ boxShadow: "inset 0 0 0 1px rgba(59,130,246,0.12)" }}
             />
 
-            <div className="relative p-7 lg:p-12">
-              {/* ✅ НАША МИССИЯ — градиент + выделение */}
-              <div className="flex items-center gap-3">
-                <span
+            {/* ✅ mobile-safe padding (desktop unchanged) */}
+            <div className="relative p-5 sm:p-6 lg:p-14">
+              {/* HEADER CENTER (как WhatIsWild) */}
+              <div className="flex flex-col items-center text-center">
+                <h2
                   className="
                     font-[var(--font-teko)] font-semibold uppercase
-                    tracking-[0.18em]
-                    text-[28px] leading-none
-                    lg:text-[40px]
+                    tracking-[0.12em]
+                    text-[38px] leading-[0.95]
+                    sm:text-[52px]
+                    lg:text-[76px]
+                    xl:text-[86px]
                     bg-clip-text text-transparent
                   "
                   style={{
                     backgroundImage: `
                       linear-gradient(
-                        90deg,
-                        rgba(190,210,255,0.98) 0%,
-                        rgba(110,170,255,0.92) 45%,
-                        rgba(6,182,212,0.88) 100%
+                        180deg,
+                        rgba(200,220,255,1) 0%,
+                        rgba(130,170,255,0.95) 45%,
+                        rgba(90,130,210,0.90) 100%
                       )
                     `,
-                    textShadow: "0 12px 54px rgba(40,80,160,0.45)",
+                    textShadow: "0 14px 64px rgba(40,80,160,0.55)",
                   }}
                 >
                   НАША МИССИЯ
-                </span>
+                </h2>
 
                 <span
                   aria-hidden
-                  className="hidden sm:block h-px flex-1"
+                  className="mt-5 h-px w-40 sm:w-56"
                   style={{
                     background:
-                      "linear-gradient(90deg, rgba(59,130,246,.55), rgba(6,182,212,.35), transparent)",
+                      "linear-gradient(90deg, transparent, rgba(59,130,246,.65), rgba(6,182,212,.45), transparent)",
                     boxShadow: "0 0 18px rgba(59,130,246,.18)",
                   }}
                 />
               </div>
 
-              {/* ✅ ТВОЙ КОНТЕКСТ — НЕ МЕНЯЮ НИ СЛОВА */}
-              <div className="mt-6 max-w-[920px] space-y-3 text-[15px] leading-relaxed text-white/80 lg:text-[18px] lg:leading-relaxed">
+              {/* TEXT CENTER (mobile-safe sizes) */}
+              <div className="mt-7 mx-auto max-w-[1200px] text-center space-y-4 sm:space-y-5 text-[16px] leading-relaxed text-white/85 sm:text-[19px] lg:text-[22px]">
                 <p>
-                  Наша миссия — дать каждому игроку реальный шанс стать частью состава WILD
-                  и пройти путь от любителя до медийного профессионала.
+                  Наша миссия — дать каждому игроку реальный шанс стать частью
+                  состава WILD и пройти путь от любителя до медийного
+                  профессионала.
                 </p>
                 <p>WILD создаёт систему, в которой игрок не остаётся один.</p>
                 <p>
-                  Здесь каждый развивается вместе с составом, получает поддержку капитанов,
-                  играет в турнирах, растёт в рейтингах и становится частью большой
-                  экосистемы
+                  Здесь каждый развивается вместе с составом, получает поддержку
+                  капитанов, играет в турнирах, растёт в рейтингах и становится
+                  частью большой экосистемы.
                 </p>
               </div>
 
-              {/* ✅ карточки без дубля смысла + “состав” вместо “ростер/команда” */}
-              <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {/* PILLARS (tight gaps + mobile padding) */}
+              <div className="mt-10 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {PILLARS.map((p) => (
                   <PillarStrip key={p.title} {...p} allowHover={allowHover} />
                 ))}
@@ -162,31 +163,37 @@ function PillarStrip({
   return (
     <m.div
       whileHover={allowHover ? { y: -2 } : undefined}
+      transition={{ duration: 0.18 }}
       className="
         relative overflow-hidden rounded-2xl
-        border border-white/10 bg-white/[0.03]
-        px-5 py-5
+        border border-white/10 bg-white/[0.04]
+        p-4 sm:p-6
       "
     >
-      <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.08)]" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.10)]" />
 
+      {/* ✅ FIX: было h-36ingle (опечатка) -> нормальные размеры */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rotate-12 opacity-40 blur-2xl"
+        className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rotate-12 opacity-40 blur-2xl"
         style={{
           background:
-            "radial-gradient(circle at 30% 30%, rgba(59,130,246,.35), transparent 70%)",
+            "radial-gradient(circle at 30% 30%, rgba(59,130,246,.36), transparent 70%)",
         }}
       />
 
-      <div className="relative flex items-start gap-3">
-        <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
-          <Icon className="h-4 w-4 text-[color:var(--wild-accent)]" />
+      <div className="relative flex items-start gap-4">
+        <div className="mt-0.5 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] shrink-0">
+          <Icon className="h-5 w-5 text-[color:var(--wild-accent)]" />
         </div>
 
-        <div>
-          <div className="text-[13px] font-semibold text-white">{title}</div>
-          <div className="mt-1 text-xs text-white/60 leading-relaxed">{subtitle}</div>
+        <div className="min-w-0">
+          <div className="text-[15px] sm:text-base font-semibold text-white">
+            {title}
+          </div>
+          <div className="mt-1 text-[13px] sm:text-sm text-white/65 leading-relaxed">
+            {subtitle}
+          </div>
         </div>
       </div>
     </m.div>

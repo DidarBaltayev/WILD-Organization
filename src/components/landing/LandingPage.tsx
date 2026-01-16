@@ -1,45 +1,63 @@
 import BackgroundNeural from "./BackgroundNeural";
-import Header from "./Header";
+import FloatingNav from "./FloatingNav";
 import Hero from "./About";
 import Mission from "./Mission";
 import Platform from "./WhatIsPlatform";
-import ScaleSection from "./Scale";
 import RankShowcase from "./RankShowcase";
+import ScaleSection from "./Scale";
+import Partnership from "./Partnership";
 
 export default function LandingPage() {
   return (
-    <main className="relative min-h-screen text-white">
+    <main className="relative min-h-screen text-white overflow-x-hidden">
       {/* ONE GLOBAL BACKGROUND FOR WHOLE PAGE */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <BackgroundNeural />
       </div>
 
-      <Header />
+      <FloatingNav />
 
       <div className="relative z-10">
         {/* 1) ABOUT */}
         <section id="about" className="scroll-mt-[110px]">
-          <Hero />
+          <div className="containerWide">
+            <Hero />
+          </div>
         </section>
 
         {/* 2) MISSION */}
         <section id="mission" className="section scroll-mt-[110px]">
-          <Mission />
+          <div className="containerWide">
+            <Mission />
+          </div>
         </section>
 
         {/* 3) PLATFORM */}
         <section id="platform" className="section scroll-mt-[110px]">
-          <Platform />
+          <div className="containerWide">
+            <Platform />
+          </div>
         </section>
 
         {/* 4) ROSTERS */}
         <section id="rosters" className="section scroll-mt-[110px]">
-          <RankShowcase />
+          <div className="containerXL">
+            <RankShowcase />
+          </div>
         </section>
 
         {/* 5) SCALE */}
         <section id="scale" className="section scroll-mt-[110px]">
-          <ScaleSection />
+          <div className="containerWide">
+            <ScaleSection />
+          </div>
+        </section>
+
+        {/* 6) PARTNERSHIP — FINAL CTA */}
+        <section id="partnership" className="section scroll-mt-[110px]">
+          <div className="containerWide">
+            <Partnership />
+          </div>
         </section>
       </div>
     </main>

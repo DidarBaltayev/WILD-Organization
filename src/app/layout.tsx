@@ -4,7 +4,6 @@ import { Inter, Teko } from "next/font/google";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-// ✅ Премиум Inter: полный диапазон весов + корректные fallback метрики
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   display: "swap",
@@ -13,7 +12,6 @@ const inter = Inter({
   adjustFontFallback: true,
 });
 
-// ✅ Заголовочный шрифт: оставляем Teko, но он будет жить только на headings через CSS
 const teko = Teko({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
@@ -74,8 +72,18 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className="scroll-smooth">
-      <body className={`${inter.variable} ${teko.variable} antialiased`}>
-        {children}
+      <body
+        className={[
+          inter.variable,
+          teko.variable,
+          "antialiased",
+          "min-h-screen",
+          "bg-black text-white",
+          "overflow-x-hidden",
+        ].join(" ")}
+      >
+        {/* единая базовая обёртка, НЕ ограничивает ширину */}
+        <div className="min-h-screen">{children}</div>
       </body>
     </html>
   );
