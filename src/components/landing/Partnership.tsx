@@ -314,24 +314,24 @@ export default function Partnership() {
   );
 
   return (
-    <section className="relative py-14 sm:py-16 lg:py-22">
+    <section className="relative py-10 sm:py-14 lg:py-22">
       <div className="relative mx-auto w-full max-w-[1800px] px-4 sm:px-6 lg:px-10 2xl:max-w-[2200px]">
         <Glow
-          className="absolute -top-20 left-0 h-[260px] w-[860px] blur-3xl opacity-45"
+          className="absolute -top-16 left-0 h-[220px] w-[760px] blur-3xl opacity-45"
           style={{
             background:
               "radial-gradient(65% 65% at 28% 50%, rgba(59,130,246,.52), transparent 72%)",
           }}
         />
         <Glow
-          className="absolute -top-14 right-0 h-[240px] w-[760px] blur-3xl opacity-40"
+          className="absolute -top-12 right-0 h-[210px] w-[720px] blur-3xl opacity-40"
           style={{
             background:
               "radial-gradient(65% 65% at 65% 45%, rgba(255,70,70,.26), transparent 74%)",
           }}
         />
         <Glow
-          className="absolute -bottom-14 left-1/2 h-[240px] w-[900px] -translate-x-1/2 blur-3xl opacity-25"
+          className="absolute -bottom-12 left-1/2 h-[210px] w-[860px] -translate-x-1/2 blur-3xl opacity-25"
           style={{
             background:
               "radial-gradient(70% 65% at 50% 50%, rgba(255,255,255,.18), transparent 75%)",
@@ -342,19 +342,18 @@ export default function Partnership() {
           className={cn(
             "relative overflow-hidden rounded-[34px] border border-white/10",
             "bg-white/[0.02] backdrop-blur-xl",
-            "px-5 sm:px-7 lg:px-10 py-7 sm:py-9"
+            "px-4 sm:px-7 lg:px-10 py-5 sm:py-8"
           )}
         >
           <GridNoise />
 
-          {/* moved CTA here: next to the title (best place) */}
-          <div className="relative z-10 mt-5">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div className="relative z-10">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
               <h3
                 className={cn(
                   "font-[var(--font-teko)] font-semibold",
                   "tracking-[0.04em]",
-                  "text-[38px] leading-[0.95] sm:text-[56px] lg:text-[74px] xl:text-[82px]",
+                  "text-[30px] leading-[0.98] sm:text-[56px] lg:text-[74px] xl:text-[82px]",
                   "bg-clip-text text-transparent"
                 )}
                 style={{
@@ -375,7 +374,8 @@ export default function Partnership() {
                   "w-full sm:w-auto",
                   "rounded-2xl border border-white/10",
                   "bg-white/[0.06] hover:bg-white/[0.10]",
-                  "px-6 py-3.5",
+                  "px-5 sm:px-6",
+                  "py-3 sm:py-3.5",
                   "text-[12px] font-extrabold tracking-[0.18em] uppercase",
                   "text-white/92 transition"
                 )}
@@ -384,11 +384,11 @@ export default function Partnership() {
               </a>
             </div>
 
-            <div className="mt-5 sm:mt-6 h-px w-full bg-gradient-to-r from-white/18 via-white/10 to-transparent" />
+            <div className="mt-4 sm:mt-6 h-px w-full bg-gradient-to-r from-white/18 via-white/10 to-transparent" />
           </div>
         </div>
 
-        <div className="mt-8 sm:mt-10 grid gap-4 md:gap-5 lg:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-6 sm:mt-10 grid gap-3 sm:gap-4 md:gap-5 lg:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {cards.map((c) => (
             <CardItem key={c.n} card={c} reduce={reduce} />
           ))}

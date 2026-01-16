@@ -13,18 +13,18 @@ import { ArrowRight, LogIn, X, Menu } from "lucide-react";
 
 type Item = { label: string; href: string };
 
+// ✅ УБРАНО: "Преимущества" и "Контакты"
+// ✅ "Сотрудничество" -> #partnership (реальный id секции)
 const ITEMS: Item[] = [
   { label: "О нас", href: "#about" },
   { label: "Платформа", href: "#platform" },
   { label: "Топ-10 составов", href: "#rosters" },
   { label: "Масштаб", href: "#scale" },
-  { label: "Преимущества", href: "#why-players" },
-  { label: "Сотрудничество", href: "#why-wild" },
-  { label: "Контакты", href: "#contacts" },
+  { label: "Сотрудничество", href: "#partnership" },
 ];
 
-// ✅ Эти пункты должны работать ВСЕГДА, без ожидания enabled-state
-const ALWAYS_ENABLED = new Set<string>(["#about", "#rosters"]);
+// ✅ Эти пункты должны работать ВСЕГДА (даже если секция появляется позже)
+const ALWAYS_ENABLED = new Set<string>(["#about", "#rosters", "#partnership"]);
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
@@ -61,7 +61,7 @@ export default function FloatingNav() {
     () => new Array(ITEMS.length).fill(false)
   );
 
-  // ✅ определяем, какие секции реально есть на странице
+  // ✅ Проверка секций: сразу + повтор (если секции подгружаются/рендерятся позже)
   useEffect(() => {
     const compute = () => {
       setEnabled(
@@ -73,11 +73,18 @@ export default function FloatingNav() {
     };
 
     compute();
-    const t = window.setTimeout(compute, 250);
+
+    // повторные прогоны — решают кейс "секция появилась позже"
+    const t1 = window.setTimeout(compute, 200);
+    const t2 = window.setTimeout(compute, 800);
+    const t3 = window.setTimeout(compute, 1600);
+
     window.addEventListener("resize", compute);
     return () => {
       window.removeEventListener("resize", compute);
-      window.clearTimeout(t);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.clearTimeout(t3);
     };
   }, []);
 
@@ -111,7 +118,7 @@ export default function FloatingNav() {
     };
   }, [activeIdx, hoverIdx]);
 
-  // ---------- ACTIVE SECTION ON SCROLL (lightweight) ----------
+  // ---------- ACTIVE SECTION ON SCROLL ----------
   useEffect(() => {
     let raf = 0;
 
@@ -119,7 +126,7 @@ export default function FloatingNav() {
       raf = 0;
       const y = window.scrollY;
 
-      setScrolled(y > 16);
+      setScrolled(y > 12);
       setScrollGlow(clamp(y / 520, 0, 1));
 
       const offset = getScrollOffset();
@@ -180,8 +187,8 @@ export default function FloatingNav() {
     const target = document.querySelector<HTMLElement>(href);
     if (!target) return false;
 
-    // ✅ учитываем fixed navbar: прыжок к точке выше секции
-    const top = window.scrollY + target.getBoundingClientRect().top - getScrollOffset();
+    const top =
+      window.scrollY + target.getBoundingClientRect().top - getScrollOffset();
 
     window.scrollTo({
       top: Math.max(0, top),
@@ -198,23 +205,19 @@ export default function FloatingNav() {
     ok: boolean
   ) => {
     if (!ok) {
-      // disabled — блокируем
       e.preventDefault();
       e.stopPropagation();
       return;
     }
 
-    // ✅ ДАЁМ БРАУЗЕРУ ЯКОРЬ КАК FALLBACK
-    // Но делаем мягкий scrollTo, чтобы было одинаково на всех устройствах
     const did = trySmoothScroll(href);
     if (did) {
-      e.preventDefault(); // мы сами проскроллили
+      e.preventDefault();
       setOpen(false);
       setActiveIdx(idx);
       setHoverIdx(null);
       requestAnimationFrame(() => setLineToIdx(idx));
     }
-    // если did=false — якорь отработает нативно без помех
   };
 
   const pillScale = scrolled ? 0.99 : 1;
@@ -236,7 +239,7 @@ export default function FloatingNav() {
   return (
     <LazyMotion features={domAnimation}>
       <>
-        <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-[80]">
+        <nav className="fixed top-3 sm:top-5 left-1/2 -translate-x-1/2 z-[80]">
           {/* DESKTOP */}
           <m.div
             initial={false}
@@ -407,8 +410,9 @@ export default function FloatingNav() {
                   : { type: "spring", stiffness: 260, damping: 22 }
               }
               className="relative flex items-center justify-between rounded-full border border-white/10
-                         bg-[color:var(--wild-bg)]/72 backdrop-blur px-4 py-2
-                         w-[calc(100vw-24px)] max-w-[520px] overflow-hidden"
+                         bg-[color:var(--wild-bg)]/72 backdrop-blur
+                         px-3.5 py-1.5
+                         w-[calc(100vw-20px)] max-w-[520px] overflow-hidden"
               style={{
                 backdropFilter: `blur(${blurPx}px)`,
                 boxShadow:
@@ -430,13 +434,13 @@ export default function FloatingNav() {
               />
 
               <a href="/landing" className="flex items-center gap-2">
-                <span className="font-extrabold tracking-[0.18em] text-white">
+                <span className="font-extrabold tracking-[0.18em] text-[13px] text-white">
                   WILD
                 </span>
               </a>
 
               <button
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white"
                 aria-label="Toggle menu"
                 aria-expanded={open}
                 onClick={() => setOpen((o) => !o)}
@@ -460,16 +464,29 @@ export default function FloatingNav() {
 
               <m.div
                 ref={mobilePanelRef}
-                className="sm:hidden fixed left-1/2 -translate-x-1/2 top-[74px] z-[80]
-                         w-[calc(100vw-24px)] max-w-[520px]"
-                initial={reduce ? { opacity: 0 } : { opacity: 0, y: -10, scale: 0.98 }}
+                className="sm:hidden fixed left-1/2 -translate-x-1/2 top-[62px] z-[80]
+                         w-[calc(100vw-20px)] max-w-[520px]"
+                initial={
+                  reduce
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: -10, scale: 0.98 }
+                }
                 animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10, scale: 0.98 }}
-                transition={reduce ? { duration: 0.14 } : { type: "spring", stiffness: 260, damping: 22 }}
+                exit={
+                  reduce
+                    ? { opacity: 0 }
+                    : { opacity: 0, y: -10, scale: 0.98 }
+                }
+                transition={
+                  reduce
+                    ? { duration: 0.14 }
+                    : { type: "spring", stiffness: 260, damping: 22 }
+                }
               >
                 <div
                   className="relative rounded-2xl border border-white/10
-                             bg-[color:var(--wild-bg)]/86 backdrop-blur-xl p-4 overflow-hidden"
+                             bg-[color:var(--wild-bg)]/86 backdrop-blur-xl
+                             p-3 overflow-hidden"
                   style={{
                     boxShadow:
                       "0 26px 80px rgba(0,0,0,.60), inset 0 1px 0 rgba(255,255,255,.06)",
@@ -484,7 +501,7 @@ export default function FloatingNav() {
                     }}
                   />
 
-                  <ul className="relative flex flex-col gap-2">
+                  <ul className="relative flex flex-col gap-2 max-h-[60vh] overflow-auto overscroll-contain pr-1 [-webkit-overflow-scrolling:touch]">
                     {ITEMS.map((i, idx) => {
                       const ok = enabled[idx];
                       const isActive = idx === activeIdx && ok;
@@ -494,9 +511,14 @@ export default function FloatingNav() {
                           <a
                             href={i.href}
                             className={[
-                              "flex items-center justify-between rounded-xl px-3 py-3",
+                              "flex items-center justify-between rounded-xl",
+                              "px-3 py-2.5",
                               "border border-white/10 bg-white/[0.03]",
-                              ok ? (isActive ? "text-white" : "text-white/70") : "text-white/35 cursor-not-allowed",
+                              ok
+                                ? isActive
+                                  ? "text-white"
+                                  : "text-white/70"
+                                : "text-white/35 cursor-not-allowed",
                             ].join(" ")}
                             onClick={(e) => {
                               onNavClick(e, i.href, idx, ok);
@@ -504,7 +526,9 @@ export default function FloatingNav() {
                             }}
                             aria-disabled={!ok}
                           >
-                            <span className="font-medium">{i.label}</span>
+                            <span className="font-medium text-[14px]">
+                              {i.label}
+                            </span>
                             <span
                               className="h-2 w-2 rounded-full"
                               style={{
@@ -527,7 +551,7 @@ export default function FloatingNav() {
                       <m.a
                         href="/api/auth/steam"
                         whileTap={reduce ? undefined : { scale: 0.985 }}
-                        className="relative block text-center rounded-xl px-4 py-3 font-semibold overflow-hidden"
+                        className="relative block text-center rounded-xl px-4 py-2.5 font-semibold overflow-hidden"
                         style={steamStyle}
                       >
                         <span
