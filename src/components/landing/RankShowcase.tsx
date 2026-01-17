@@ -552,75 +552,75 @@ export default function RankShowcase() {
   const playersByRoster = useMemo<Record<string, Player[]>>(
     () => ({
       W1: [
-        { name: "Rex", role: "AWP", elo: 3450, flag: "🇹🇷" },
-        { name: "Khan", role: "Entry", elo: 3320, flag: "🇰🇿" },
-        { name: "Viper", role: "Rifler", elo: 3250, flag: "🇷🇺" },
-        { name: "Sonic", role: "IGL", elo: 3180, flag: "🇺🇦" },
-        { name: "Nova", role: "Support", elo: 3100, flag: "🇹🇲" },
+        { name: "Unknown", role: "AWP", elo: 0, flag: "🇹🇷" },
+        { name: "Unknown", role: "Entry", elo: 0, flag: "🇰🇿" },
+        { name: "Unknown", role: "Rifler", elo: 0, flag: "🇷🇺" },
+        { name: "Unknown", role: "IGL", elo: 0, flag: "🇺🇦" },
+        { name: "Unknown", role: "Support", elo: 0, flag: "🇹🇲" },
       ],
       W2: [
-        { name: "Blade", role: "IGL", elo: 3120, flag: "🇹🇷" },
-        { name: "Ash", role: "Rifler", elo: 3050, flag: "🇰🇿" },
-        { name: "Orbit", role: "AWP", elo: 2980, flag: "🇷🇺" },
-        { name: "Ghost", role: "Entry", elo: 2920, flag: "🇺🇿" },
-        { name: "Pulse", role: "Support", elo: 2890, flag: "🇺🇦" },
-        { name: "Mako", role: "Rifler", elo: 2840, flag: "🇹🇲" },
+        { name: "Unknown", role: "IGL", elo: 0, flag: "🇹🇷" },
+        { name: "Unknown", role: "Rifler", elo: 0, flag: "🇰🇿" },
+        { name: "Unknown", role: "AWP", elo: 0, flag: "🇷🇺" },
+        { name: "Unknown", role: "Entry", elo: 0, flag: "🇺🇿" },
+        { name: "Unknown", role: "Support", elo: 0, flag: "🇺🇦" },
+        { name: "Unknown", role: "Rifler", elo: 0, flag: "🇹🇲" },
       ],
       W3: [
-        { name: "Lynx", role: "Entry", elo: 3010, flag: "🇹🇷" },
-        { name: "Frost", role: "AWP", elo: 2960, flag: "🇷🇺" },
-        { name: "Raven", role: "Rifler", elo: 2910, flag: "🇰🇿" },
-        { name: "Bishop", role: "IGL", elo: 2870, flag: "🇺🇦" },
-        { name: "Iris", role: "Support", elo: 2810, flag: "🇹🇲" },
+        { name: "Unknown", role: "Entry", elo: 0, flag: "🇹🇷" },
+        { name: "Unknown", role: "AWP", elo: 0, flag: "🇷🇺" },
+        { name: "Unknown", role: "Rifler", elo: 0, flag: "🇰🇿" },
+        { name: "Unknown", role: "IGL", elo: 0, flag: "🇺🇦" },
+        { name: "Unknown", role: "Support", elo: 0, flag: "🇹🇲" },
       ],
       W4: [
-        { name: "Kite", role: "Rifler", elo: 2750 },
-        { name: "Zero", role: "Entry", elo: 2690 },
-        { name: "Aero", role: "AWP", elo: 2620 },
-        { name: "Mint", role: "Support", elo: 2580 },
-        { name: "Omen", role: "IGL", elo: 2540 },
+        { name: "Unknown", role: "Rifler", elo: 2750 },
+        { name: "Unknown", role: "Entry", elo: 2690 },
+        { name: "Unknown", role: "AWP", elo: 2620 },
+        { name: "Unknown", role: "Support", elo: 2580 },
+        { name: "Unknown", role: "IGL", elo: 2540 },
       ],
       W5: [
-        { name: "Hex", role: "IGL", elo: 2480 },
-        { name: "Nix", role: "Entry", elo: 2430 },
-        { name: "Sage", role: "Support", elo: 2390 },
-        { name: "Rook", role: "Rifler", elo: 2360 },
-        { name: "Wave", role: "AWP", elo: 2310 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
       W6: [
-        { name: "Volt", role: "Rifler", elo: 2280 },
-        { name: "Gale", role: "Support", elo: 2240 },
-        { name: "Claw", role: "Entry", elo: 2210 },
-        { name: "Mono", role: "IGL", elo: 2180 },
-        { name: "Zed", role: "AWP", elo: 2150 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
       W7: [
-        { name: "Kuro", role: "Entry", elo: 2100 },
-        { name: "Echo", role: "Rifler", elo: 2070 },
-        { name: "Lux", role: "Support", elo: 2040 },
-        { name: "Grim", role: "IGL", elo: 2010 },
-        { name: "Snipe", role: "AWP", elo: 1980 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
       W8: [
-        { name: "Fox", role: "Rifler", elo: 1940 },
-        { name: "Rin", role: "Support", elo: 1910 },
-        { name: "Kai", role: "Entry", elo: 1890 },
-        { name: "Moss", role: "IGL", elo: 1860 },
-        { name: "Ivy", role: "AWP", elo: 1830 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
       W9: [
-        { name: "Tao", role: "IGL", elo: 1800 },
-        { name: "Neo", role: "Rifler", elo: 1770 },
-        { name: "Rio", role: "Support", elo: 1740 },
-        { name: "Jett", role: "Entry", elo: 1710 },
-        { name: "Keen", role: "AWP", elo: 1680 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
       W10: [
-        { name: "Sol", role: "Support", elo: 1650 },
-        { name: "Rune", role: "Entry", elo: 1620 },
-        { name: "Spar", role: "Rifler", elo: 1590 },
-        { name: "Nash", role: "IGL", elo: 1560 },
-        { name: "Quill", role: "AWP", elo: 1530 },
+        { name: "Unknown", role: "Support", elo: 0 },
+        { name: "Unknown", role: "Entry", elo: 0 },
+        { name: "Unknown", role: "Rifler", elo: 0 },
+        { name: "Unknown", role: "IGL", elo: 0 },
+        { name: "Unknown", role: "AWP", elo: 0 },
       ],
     }),
     []
@@ -640,7 +640,7 @@ export default function RankShowcase() {
       ["L", "L", "W", "L", "L"],
     ];
 
-    const basePoints = [256, 210, 180, 150, 124, 100, 76, 52, 28, 4];
+    const basePoints = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     const mk = (roster: string, idx: number): RosterStats => {
       const players = playersByRoster[roster] ?? [];
@@ -661,8 +661,11 @@ export default function RankShowcase() {
         { name: "—", elo: -1 }
       );
 
-      const matches = clamp(34 - idx * 2, 18, 38);
-      const wrBase = clamp(79 - idx * 3, 35, 88);
+
+      // Статистика
+      
+      const matches = clamp(0 - idx * 0, 0, 0);
+      const wrBase = clamp(0 - idx * 0, 0, 0);
       const wins = Math.round((matches * wrBase) / 100);
       const losses = Math.max(0, matches - wins);
       const winrate = matches ? Math.round((wins / matches) * 100) : 0;
