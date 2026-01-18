@@ -186,7 +186,7 @@ const CardItem = memo(function CardItem({
               <span className="tabular-nums">{card.n}</span>
             </Chip>
 
-            <div className="relative h-9 w-9 rounded-2xl border border-white/10 bg-white/[0.04] overflow-hidden">
+            <div className="relative h-0 w-0 rounded-2x1 border border-white/1 bg-white/[0.00] overflow-hidden">
               <div
                 aria-hidden
                 className="absolute inset-0 opacity-70"
@@ -251,7 +251,7 @@ export default function Partnership() {
     () => [
       {
         n: "01",
-        title: "Не аудитория. Действующая система людей.",
+        title: "Действующая система людей.",
         desc: "WILD — это структура, где каждый участник не «смотрит», а действует внутри экосистемы: составы, роли, матчи и прогресс.",
         bullets: [
           "Вовлечённость создаётся участием, а не охватами.",
@@ -281,7 +281,7 @@ export default function Partnership() {
       },
       {
         n: "04",
-        title: "Медиа — актив, а не «стримы».",
+        title: "Медиа — актив.",
         desc: "Контент строится как система: эфиры → клипы → короткие форматы. Это естественно монетизируется через интеграции и партнёрства.",
         bullets: [
           "Интеграции органично встраиваются в события и матчи.",
@@ -349,21 +349,24 @@ export default function Partnership() {
 
           <div className="relative z-10">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4">
-              <h3
-                className={cn(
-                  "font-[var(--font-teko)] font-semibold",
-                  "tracking-[0.04em]",
-                  "text-[30px] leading-[0.98] sm:text-[56px] lg:text-[74px] xl:text-[82px]",
-                  "bg-clip-text text-transparent"
-                )}
-                style={{
-                  backgroundImage:
-                    "linear-gradient(180deg, rgba(240,248,255,1) 0%, rgba(165,205,255,0.96) 48%, rgba(90,130,210,0.9) 100%)",
-                  textShadow: "0 18px 80px rgba(40,80,160,0.55)",
-                }}
-              >
-                Партнерство и Сотрудничество
-              </h3>
+                 <h2
+                  style={{
+                    fontFamily:
+                      'var(--font-dewi), "RFDewiExpanded", var(--font-teko), var(--font-inter)',
+                    color: "#ffffff",
+                    letterSpacing: "0.08em",
+                    textShadow: "0 8px 40px rgba(0,0,0,0.6)",
+                  }}
+                  className="
+                    font-semibold uppercase
+                    text-[38px] leading-[0.95]
+                    sm:text-[52px]
+                    lg:text-[76px]
+                    xl:text-[86px]
+                  "
+                >
+                  ПАРТНЕРСТВО И СОТРУДНИЧЕСТВО
+                </h2>
 
               <a
                 href={TG_LINK}

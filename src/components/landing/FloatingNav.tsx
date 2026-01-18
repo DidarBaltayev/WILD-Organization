@@ -13,7 +13,7 @@ import { ArrowRight, LogIn, X, Menu } from "lucide-react";
 
 type Item = { label: string; href: string };
 
-// ✅ УБРАНО: "Преимущества" и "Контакты"
+// ✅ ДОБАВЛЕНО: "Контакты" -> #contacts
 // ✅ "Сотрудничество" -> #partnership (реальный id секции)
 const ITEMS: Item[] = [
   { label: "О нас", href: "#about" },
@@ -21,10 +21,16 @@ const ITEMS: Item[] = [
   { label: "Топ-10 составов", href: "#rosters" },
   { label: "Масштаб", href: "#scale" },
   { label: "Сотрудничество", href: "#partnership" },
+  { label: "Контакты", href: "#contacts" },
 ];
 
 // ✅ Эти пункты должны работать ВСЕГДА (даже если секция появляется позже)
-const ALWAYS_ENABLED = new Set<string>(["#about", "#rosters", "#partnership"]);
+const ALWAYS_ENABLED = new Set<string>([
+  "#about",
+  "#rosters",
+  "#partnership",
+  "#contacts",
+]);
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
@@ -227,11 +233,13 @@ export default function FloatingNav() {
   const rimAlpha = 0.14 + scrollGlow * 0.14;
   const washAlpha = 0.12 + scrollGlow * 0.14;
 
+  // ✅ FIX: кнопка Steam теперь СИНЯЯ (текст/бордер), не заливка
   const steamStyle = useMemo(
     () => ({
-      background:
-        "linear-gradient(90deg,var(--wild-accent),var(--wild-accent-2))",
-      color: "#0b1020",
+      background: "rgba(59,130,246,0.10)",
+      border: "1px solid rgba(59,130,246,0.35)",
+      color: "rgb(180,220,255)",
+      boxShadow: "0 0 22px rgba(59,130,246,.28)",
     }),
     []
   );
@@ -381,10 +389,10 @@ export default function FloatingNav() {
             >
               <span
                 aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-25"
+                className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity"
                 style={{
                   background:
-                    "linear-gradient(110deg, transparent, rgba(255,255,255,.35), transparent)",
+                    "linear-gradient(110deg, transparent, rgba(59,130,246,.22), transparent)",
                 }}
               />
               <span className="relative inline-flex items-center gap-2">
@@ -556,10 +564,10 @@ export default function FloatingNav() {
                       >
                         <span
                           aria-hidden
-                          className="pointer-events-none absolute inset-0 opacity-25"
+                          className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity"
                           style={{
                             background:
-                              "linear-gradient(110deg, transparent, rgba(255,255,255,.35), transparent)",
+                              "linear-gradient(110deg, transparent, rgba(59,130,246,.22), transparent)",
                           }}
                         />
                         <span className="relative inline-flex items-center justify-center gap-2">

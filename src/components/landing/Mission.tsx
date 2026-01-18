@@ -80,31 +80,24 @@ export default function Mission() {
               style={{ boxShadow: "inset 0 0 0 1px rgba(59,130,246,0.12)" }}
             />
 
-            {/* ✅ mobile-safe padding (desktop unchanged) */}
             <div className="relative p-5 sm:p-6 lg:p-14">
-              {/* HEADER CENTER (как WhatIsWild) */}
+              {/* HEADER CENTER */}
               <div className="flex flex-col items-center text-center">
                 <h2
+                  style={{
+                    fontFamily:
+                      'var(--font-dewi), "RFDewiExpanded", var(--font-teko), var(--font-inter)',
+                    color: "#ffffff",
+                    letterSpacing: "0.08em",
+                    textShadow: "0 8px 40px rgba(0,0,0,0.6)",
+                  }}
                   className="
-                    font-[var(--font-teko)] font-semibold uppercase
-                    tracking-[0.12em]
+                    font-semibold uppercase
                     text-[38px] leading-[0.95]
                     sm:text-[52px]
                     lg:text-[76px]
                     xl:text-[86px]
-                    bg-clip-text text-transparent
                   "
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(
-                        180deg,
-                        rgba(200,220,255,1) 0%,
-                        rgba(130,170,255,0.95) 45%,
-                        rgba(90,130,210,0.90) 100%
-                      )
-                    `,
-                    textShadow: "0 14px 64px rgba(40,80,160,0.55)",
-                  }}
                 >
                   НАША МИССИЯ
                 </h2>
@@ -120,7 +113,7 @@ export default function Mission() {
                 />
               </div>
 
-              {/* TEXT CENTER (mobile-safe sizes) */}
+              {/* TEXT */}
               <div className="mt-7 mx-auto max-w-[1200px] text-center space-y-4 sm:space-y-5 text-[16px] leading-relaxed text-white/85 sm:text-[19px] lg:text-[22px]">
                 <p>
                   Наша миссия — дать каждому игроку реальный шанс стать частью
@@ -135,7 +128,7 @@ export default function Mission() {
                 </p>
               </div>
 
-              {/* PILLARS (tight gaps + mobile padding) */}
+              {/* PILLARS */}
               <div className="mt-10 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {PILLARS.map((p) => (
                   <PillarStrip key={p.title} {...p} allowHover={allowHover} />
@@ -172,7 +165,6 @@ function PillarStrip({
     >
       <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.10)]" />
 
-      {/* ✅ FIX: было h-36ingle (опечатка) -> нормальные размеры */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rotate-12 opacity-40 blur-2xl"

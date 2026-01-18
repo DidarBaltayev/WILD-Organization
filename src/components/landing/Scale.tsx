@@ -318,24 +318,24 @@ export default function Scale() {
               }}
             />
 
-            <h2
-              className="
-                font-[var(--font-teko)]
-                font-semibold uppercase
-                tracking-[0.18em]
-                text-[34px] leading-[0.95]
-                sm:text-[40px]
-                lg:text-[60px] lg:leading-[0.92]
-                bg-clip-text text-transparent
-              "
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, rgba(190,210,255,0.98) 0%, rgba(110,170,255,0.92) 45%, rgba(6,182,212,0.88) 100%)",
-                textShadow: "0 10px 44px rgba(40,80,160,0.45)",
-              }}
-            >
-              ГРАФИК УЧАСТНИКОВ WILD
-            </h2>
+      <h2
+                  style={{
+                    fontFamily:
+                      'var(--font-dewi), "RFDewiExpanded", var(--font-teko), var(--font-inter)',
+                    color: "#ffffff",
+                    letterSpacing: "0.08em",
+                    textShadow: "0 8px 40px rgba(0,0,0,0.6)",
+                  }}
+                  className="
+                    font-semibold uppercase
+                    text-[38px] leading-[0.95]
+                    sm:text-[52px]
+                    lg:text-[76px]
+                    xl:text-[86px]
+                  "
+                >
+                  ГРАФИК УЧАСТНИКОВ
+                </h2>
 
             <div className="mt-3 flex items-center justify-center gap-2 text-[11px] sm:text-xs">
               <span

@@ -52,7 +52,7 @@ export default function Platform() {
           <>
             По итогам сезона топ составы автоматически проходят в турнир{" "}
             <span
-              className="font-[var(--font-teko)] font-semibold uppercase tracking-[0.14em] bg-clip-text text-transparent"
+              className="font-[var(--font-display)] font-semibold uppercase tracking-[0.14em] bg-clip-text text-transparent"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, rgba(190,210,255,0.98), rgba(110,170,255,0.92), rgba(6,182,212,0.92))",
@@ -111,33 +111,27 @@ export default function Platform() {
               style={{ boxShadow: "inset 0 0 0 1px rgba(59,130,246,0.12)" }}
             />
 
-            {/* ✅ mobile-safe padding (desktop unchanged) */}
+            {/* padding */}
             <div className="relative p-5 sm:p-6 lg:p-14">
-              {/* HEADER CENTER (как WhatIsWild/Mission) */}
+              {/* HEADER CENTER */}
               <div className="flex flex-col items-center text-center">
-                <h2
+    <h2
+                  style={{
+                    fontFamily:
+                      'var(--font-dewi), "RFDewiExpanded", var(--font-teko), var(--font-inter)',
+                    color: "#ffffff",
+                    letterSpacing: "0.08em",
+                    textShadow: "0 8px 40px rgba(0,0,0,0.6)",
+                  }}
                   className="
-                    font-[var(--font-teko)] font-semibold uppercase
-                    tracking-[0.12em]
+                    font-semibold uppercase
                     text-[38px] leading-[0.95]
                     sm:text-[52px]
                     lg:text-[76px]
                     xl:text-[86px]
-                    bg-clip-text text-transparent
                   "
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(
-                        180deg,
-                        rgba(200,220,255,1) 0%,
-                        rgba(130,170,255,0.95) 45%,
-                        rgba(90,130,210,0.90) 100%
-                      )
-                    `,
-                    textShadow: "0 14px 64px rgba(40,80,160,0.55)",
-                  }}
                 >
-                  ПЛАТФОРМА WILD
+                  ПЛАТФОРМА
                 </h2>
 
                 <span
@@ -151,7 +145,7 @@ export default function Platform() {
                 />
               </div>
 
-              {/* TEXT CENTER (контекст НЕ менял) */}
+              {/* TEXT CENTER */}
               <div className="mt-7 mx-auto max-w-[1200px] space-y-4 sm:space-y-5 text-center text-[16px] leading-relaxed text-white/85 sm:text-[19px] lg:text-[22px]">
                 <p>
                   Платформа WILD — цифровая основа всей организации, объединяющая
@@ -163,7 +157,7 @@ export default function Platform() {
                 </p>
               </div>
 
-              {/* ✅ NODES: phone-first spacing + padding inside cards */}
+              {/* NODES */}
               <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {NODES.map((n) => (
                   <NodeCard key={n.title} {...n} allowHover={allowHover} />
@@ -198,9 +192,7 @@ function NodeCard({
         p-4 sm:p-6
       "
     >
-      {/* inner stroke */}
       <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(59,130,246,0.10)]" />
-      {/* top shine */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rotate-12 opacity-40 blur-2xl"
@@ -211,7 +203,6 @@ function NodeCard({
       />
 
       <div className="relative flex items-start gap-4">
-        {/* ✅ icon box scales down on phones */}
         <div className="mt-0.5 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] shrink-0">
           <Icon className="h-5 w-5 text-[color:var(--wild-accent)]" />
         </div>

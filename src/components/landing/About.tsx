@@ -98,30 +98,36 @@ export default function WhatIsWild() {
             <div className="relative p-5 sm:p-6 lg:p-14">
               {/* TITLE CENTER */}
               <div className="flex flex-col items-center text-center">
-                <h2
-                  className="
-                    font-[var(--font-teko)] font-semibold uppercase
-                    tracking-[0.12em]
-                    text-[38px] leading-[0.95]
-                    sm:text-[52px]
-                    lg:text-[76px]
-                    xl:text-[86px]
-                    bg-clip-text text-transparent
-                  "
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(
-                        180deg,
-                        rgba(200,220,255,1) 0%,
-                        rgba(130,170,255,0.95) 45%,
-                        rgba(90,130,210,0.90) 100%
-                      )
-                    `,
-                    textShadow: "0 14px 64px rgba(40,80,160,0.55)",
-                  }}
-                >
-                  ЧТО ТАКОЕ WILD?
-                </h2>
+   <h2
+  style={{
+    fontFamily:
+      'var(--font-dewi), "RFDewiExpanded", var(--font-teko), var(--font-inter)',
+    color: "#ffffff",
+    letterSpacing: "0.08em",
+    textShadow: "0 8px 40px rgba(0,0,0,0.6)",
+  }}
+  className="
+    font-semibold uppercase
+    text-[38px] leading-[0.95]
+    sm:text-[52px]
+    lg:text-[76px]
+    xl:text-[86px]
+  "
+>
+  ЧТО ТАКОЕ{" "}
+  <span
+    className="bg-clip-text text-transparent"
+    style={{
+      backgroundImage:
+        "linear-gradient(90deg, #3b82f6 0%, #22d3ee 50%, #60a5fa 100%)",
+      textShadow: "0 0 24px rgba(59,130,246,0.45)",
+    }}
+  >
+    WILD
+  </span>
+  ?
+</h2>
+
 
                 <span
                   aria-hidden
@@ -216,9 +222,7 @@ export default function WhatIsWild() {
                     <m.a
                       href="/landing"
                       whileTap={reduce ? undefined : { scale: 0.985 }}
-                      whileHover={
-                        allowHover ? { y: -1 } : undefined
-                      }
+                      whileHover={allowHover ? { y: -1 } : undefined}
                       className="
                         mt-6 inline-flex w-full items-center justify-center gap-2
                         rounded-xl px-6 py-4 text-base font-semibold

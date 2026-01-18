@@ -6,6 +6,8 @@ import Platform from "./WhatIsPlatform";
 import RankShowcase from "./RankShowcase";
 import ScaleSection from "./Scale";
 import Partnership from "./Partnership";
+import Contacts from "./Contacts";
+import Footer from "./Footer";
 
 export default function LandingPage() {
   return (
@@ -57,6 +59,18 @@ export default function LandingPage() {
         <section id="partnership" className="section scroll-mt-[110px]">
           <div className="containerWide">
             <Partnership />
+          </div>
+        </section>
+
+        {/* 7) CONTACTS — FOOTER */}
+        <section id="contacts" className="section scroll-mt-[110px]">
+          <div className="containerWide">
+            <Contacts />
+          </div>
+
+          {/* FACEIT-STYLE LEGAL LINE */}
+          <div className="containerWide">
+            <Footer startYear={2025} company="Rexior LLC" />
           </div>
         </section>
       </div>
